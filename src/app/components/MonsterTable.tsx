@@ -1,0 +1,207 @@
+"use client";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { Pagination } from "./Pagination";
+import { useSearchParams } from "next/navigation";
+import { MonsterRow } from "./MonsterRow";
+import { getMonsters } from "../api";
+
+const queryClient = new QueryClient();
+
+const PAGE_SIZE = 10;
+const ORDER_BY_NAME = "NAME";
+const ORDER_BY_TYPE = "TYPE";
+const ORDER_BY_SIZE = "SIZE";
+const ORDER_BY_CR = "CHALLENGE_RATING";
+const ORDER_BY_ASC = "ASC";
+const ORDER_BY_DESC = "DESC";
+
+const MonsterData = ({
+  page,
+  orderByField,
+  orderByDirection,
+  monsterSearch,
+  monsterSize,
+  monsterType,
+  monsterCRLower,
+  monsterCRUpper,
+}: {
+  page: number;
+  orderByField: string;
+  orderByDirection: string;
+  monsterSearch: string;
+  monsterSize: string;
+  monsterType: string;
+  monsterCRLower: string;
+  monsterCRUpper: string;
+}) => {
+  const monsterQuery = `query Monsters {
+    monsters (name: "${monsterSearch}", size: "${monsterSize}", type: "${monsterType}", 
+    challenge_rating: { range: { gte: ${monsterCRLower || 0}, lte: ${
+    monsterCRUpper || 30
+  } } } limit: ${PAGE_SIZE}, skip: ${
+    page * 10
+  }, order: {by: ${orderByField}, direction: ${orderByDirection}}) {
+      challenge_rating
+      image
+      index
+      name
+      size
+      alignment
+      type
+    }
+  }`;
+
+  const { isPending, error, data } = useQuery({
+    queryKey: [
+      page,
+      orderByField,
+      orderByDirection,
+      monsterSearch,
+      monsterSize,
+      monsterType,
+      monsterCRLower,
+      monsterCRUpper,
+    ],
+    queryFn: () =>
+      fetch("https://www.dnd5eapi.co/graphql/2014", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          operationName: "Monsters",
+          query: monsterQuery,
+          variables: {},
+        }),
+      }).then((res) => res.json()),
+  });
+
+  //   if (isPending) return <tr>Loading...</tr>;
+  //   if (error) return "An error has occurred: " + error.message;
+
+  return (
+    <>
+      {data?.data?.monsters?.map((monster: any) => (
+        <MonsterRow
+          key={monster.index}
+          index={monster.index}
+          image={monster.image}
+          name={monster.name}
+          cr={monster.challenge_rating}
+          type={monster.type}
+          size={monster.size}
+          alignment={monster.alignment}
+        />
+      ))}
+    </>
+  );
+};
+
+export const MonsterTable = ({
+  monsterSearch,
+  monsterSize,
+  monsterType,
+  monsterCRLower,
+  monsterCRUpper,
+}: {
+  monsterSearch: string;
+  monsterSize: string;
+  monsterType: string;
+  monsterCRLower: string;
+  monsterCRUpper: string;
+}) => {
+  const searchParams = useSearchParams();
+  const pageParam = searchParams.get("page");
+
+  // TODO: page is confusing because of the switching between using it as index and as display page number
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Order By
+  const [orderByField, setOrderByField] = useState(ORDER_BY_NAME);
+  const [orderByAsc, setOrderByAsc] = useState(true);
+
+  const handleClickSort = (field: string) => {
+    if (orderByField === field) {
+      setOrderByAsc((prevState) => !prevState);
+    } else {
+      setOrderByField(field);
+      setOrderByAsc(true);
+    }
+  };
+
+  // Calculate total number of pages
+  useEffect(() => {
+    getMonsters().then((res) => {
+      setTotalPages(Math.ceil(res.count / PAGE_SIZE));
+    });
+  }, []);
+
+  // Check query params to set current page
+  useEffect(() => {
+    setPage(parseInt(pageParam || "") - 1 || 0);
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div style={{ display: "flex" }}>
+        <div className="tableHeader" style={{ width: "10%" }}>
+          Image
+        </div>
+        <div
+          className="tableHeader"
+          style={{ width: "20%" }}
+          onClick={() => handleClickSort(ORDER_BY_NAME)}
+        >
+          Name
+        </div>
+        <div
+          className="tableHeader"
+          style={{ width: "10%" }}
+          onClick={() => handleClickSort(ORDER_BY_CR)}
+        >
+          CR
+        </div>
+        <div
+          className="tableHeader"
+          style={{ width: "20%" }}
+          onClick={() => handleClickSort(ORDER_BY_TYPE)}
+        >
+          Type
+        </div>
+        <div
+          className="tableHeader"
+          style={{ width: "10%" }}
+          onClick={() => handleClickSort(ORDER_BY_SIZE)}
+        >
+          Size
+        </div>
+        <div className="tableHeader" style={{ width: "30%" }}>
+          Alignment
+        </div>
+      </div>
+
+      <MonsterData
+        page={page}
+        orderByField={orderByField}
+        orderByDirection={orderByAsc ? ORDER_BY_ASC : ORDER_BY_DESC}
+        monsterSearch={monsterSearch}
+        monsterSize={monsterSize}
+        monsterType={monsterType}
+        monsterCRLower={monsterCRLower}
+        monsterCRUpper={monsterCRUpper}
+      />
+
+      <Pagination
+        totalPages={totalPages}
+        currentPage={page + 1}
+        setPage={setPage}
+      />
+    </QueryClientProvider>
+  );
+};

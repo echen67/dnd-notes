@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 
 const navStyle = {
   backgroundColor: "red",
-  width: "100%",
   padding: 16,
   display: "flex",
   justifyContent: "center",

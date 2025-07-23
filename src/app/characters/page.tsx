@@ -1,7 +1,9 @@
+import { Page } from "../components/Page";
+
 export default function CharactersPage() {
-    return (
-    <div>
-        <h1>Characters</h1>
-    </div>
-    )
+  return (
+    <Page>
+      <h1>Characters</h1>
+    </Page>
+  );
 }

@@ -1,106 +1,20 @@
 "use client";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Pagination } from "./Pagination";
 import { useSearchParams } from "next/navigation";
-import { MonsterRow } from "./MonsterRow";
 import { getMonsters } from "../api";
+import { MonsterData } from "./MonsterData";
 
 const queryClient = new QueryClient();
 
-const PAGE_SIZE = 10;
+export const PAGE_SIZE = 10;
 const ORDER_BY_NAME = "NAME";
 const ORDER_BY_TYPE = "TYPE";
 const ORDER_BY_SIZE = "SIZE";
 const ORDER_BY_CR = "CHALLENGE_RATING";
 const ORDER_BY_ASC = "ASC";
 const ORDER_BY_DESC = "DESC";
-
-const MonsterData = ({
-  page,
-  orderByField,
-  orderByDirection,
-  monsterSearch,
-  monsterSize,
-  monsterType,
-  monsterCRLower,
-  monsterCRUpper,
-}: {
-  page: number;
-  orderByField: string;
-  orderByDirection: string;
-  monsterSearch: string;
-  monsterSize: string;
-  monsterType: string;
-  monsterCRLower: string;
-  monsterCRUpper: string;
-}) => {
-  const monsterQuery = `query Monsters {
-    monsters (name: "${monsterSearch}", size: "${monsterSize}", type: "${monsterType}", 
-    challenge_rating: { range: { gte: ${monsterCRLower || 0}, lte: ${
-    monsterCRUpper || 30
-  } } } limit: ${PAGE_SIZE}, skip: ${
-    page * 10
-  }, order: {by: ${orderByField}, direction: ${orderByDirection}}) {
-      challenge_rating
-      image
-      index
-      name
-      size
-      alignment
-      type
-    }
-  }`;
-
-  const { isPending, error, data } = useQuery({
-    queryKey: [
-      page,
-      orderByField,
-      orderByDirection,
-      monsterSearch,
-      monsterSize,
-      monsterType,
-      monsterCRLower,
-      monsterCRUpper,
-    ],
-    queryFn: () =>
-      fetch("https://www.dnd5eapi.co/graphql/2014", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          operationName: "Monsters",
-          query: monsterQuery,
-          variables: {},
-        }),
-      }).then((res) => res.json()),
-  });
-
-  //   if (isPending) return <tr>Loading...</tr>;
-  //   if (error) return "An error has occurred: " + error.message;
-
-  return (
-    <>
-      {data?.data?.monsters?.map((monster: any) => (
-        <MonsterRow
-          key={monster.index}
-          index={monster.index}
-          image={monster.image}
-          name={monster.name}
-          cr={monster.challenge_rating}
-          type={monster.type}
-          size={monster.size}
-          alignment={monster.alignment}
-        />
-      ))}
-    </>
-  );
-};
 
 export const MonsterTable = ({
   monsterSearch,

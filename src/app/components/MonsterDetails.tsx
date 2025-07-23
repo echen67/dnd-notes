@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { formatString } from "../utils";
 import { MonsterProficiences } from "./MonsterProficiencies";
+import { Divider } from "./Divider";
 
 const BoldItalicSpan = ({ children }: { children: any }) => {
   return (
@@ -25,7 +26,7 @@ export const MonsterDetails = ({ monsterDetails }: { monsterDetails: any }) => {
   return (
     <div className="detailPanel">
       <h2>{monsterDetails.name}</h2>
-      <hr />
+      <Divider />
       <p
         style={{
           marginTop: 4,
@@ -109,7 +110,7 @@ export const MonsterDetails = ({ monsterDetails }: { monsterDetails: any }) => {
       {monsterDetails.special_abilities.length > 0 && (
         <div style={{ marginTop: 24 }}>
           <h3>Special Abilities</h3>
-          <hr style={{ marginBottom: 8 }} />
+          <Divider />
           {monsterDetails.special_abilities.map((item: any) => (
             <p
               style={{ marginBottom: 8, whiteSpace: "break-spaces" }}
@@ -125,7 +126,7 @@ export const MonsterDetails = ({ monsterDetails }: { monsterDetails: any }) => {
       {monsterDetails.actions.length > 0 && (
         <div style={{ marginTop: 24 }}>
           <h3>Actions</h3>
-          <hr style={{ marginBottom: 8 }} />
+          <Divider />
           {monsterDetails.actions.map((item: any) => (
             <p
               style={{ marginBottom: 8, whiteSpace: "break-spaces" }}
@@ -141,7 +142,7 @@ export const MonsterDetails = ({ monsterDetails }: { monsterDetails: any }) => {
       {monsterDetails.legendary_actions.length > 0 && (
         <div style={{ marginTop: 24 }}>
           <h3>Legendary Actions</h3>
-          <hr style={{ marginBottom: 8 }} />
+          <Divider />
           {monsterDetails.legendary_actions.map((item: any) => (
             <p
               style={{ marginBottom: 8, whiteSpace: "break-spaces" }}

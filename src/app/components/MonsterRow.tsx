@@ -41,32 +41,30 @@ export const MonsterRow = ({
 
   return (
     <>
-      <div key={index} className="tableRow">
-        <div style={{ display: "flex" }} onClick={handleClickRow}>
-          <div className="tableCell" style={{ width: "10%" }}>
-            <img
-              src={BASE_URL + image}
-              alt={name}
-              width={32}
-              height={32}
-              style={{ objectFit: "cover", minHeight: 32, maxHeight: 32 }}
-            />
-          </div>
-          <div className="tableCell" style={{ width: "20%" }}>
-            {name}
-          </div>
-          <div className="tableCell" style={{ width: "10%" }}>
-            {cr}
-          </div>
-          <div className="tableCell" style={{ width: "20%" }}>
-            {formatString(type)}
-          </div>
-          <div className="tableCell" style={{ width: "10%" }}>
-            {size}
-          </div>
-          <div className="tableCell" style={{ width: "30%" }}>
-            {formatString(alignment)}
-          </div>
+      <div key={index} className="tableRow" onClick={handleClickRow}>
+        <div className="tableCell" style={{ width: "10%" }}>
+          <img
+            src={BASE_URL + image}
+            alt={name}
+            width={32}
+            height={32}
+            style={{ objectFit: "cover", minHeight: 32, maxHeight: 32 }}
+          />
+        </div>
+        <div className="tableCell" style={{ width: "20%" }}>
+          {name}
+        </div>
+        <div className="tableCell" style={{ width: "10%" }}>
+          {cr}
+        </div>
+        <div className="tableCell" style={{ width: "20%" }}>
+          {formatString(type)}
+        </div>
+        <div className="tableCell" style={{ width: "10%" }}>
+          {size}
+        </div>
+        <div className="tableCell" style={{ width: "30%" }}>
+          {formatString(alignment)}
         </div>
       </div>
       {openDetails && monsterDetails && (

@@ -1,7 +1,11 @@
+import { Page } from "../components/Page";
+import { SpellTable } from "../components/SpellTable";
+
 export default function SpellsPage() {
-    return (
-    <div>
-        <h1>Spells</h1>
-    </div>
-    )
+  return (
+    <Page>
+      <h1>Spells</h1>
+      <SpellTable />
+    </Page>
+  );
 }

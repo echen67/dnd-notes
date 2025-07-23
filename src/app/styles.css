@@ -54,6 +54,7 @@ p {
   cursor: pointer;
   background-color: #eee;
   border-radius: 8;
+  display: flex;
 }
 
 .tableRow:hover {

@@ -12,7 +12,7 @@ const inputStyle = {
   border: "1px solid gray",
   borderRadius: 8,
   paddingLeft: 8,
-  height: 48,
+  height: 44,
 };
 
 const selectStyle = {
@@ -26,10 +26,14 @@ const secondaryButtonStyle = {
   color: "red",
   cursor: "pointer",
   fontWeight: "bold",
+  border: "none",
+  backgroundColor: "transparent",
+  marginTop: 4,
 };
 
 const labelStyle = {
   fontWeight: "bold",
+  marginBottom: 4,
 };
 
 export default function MonstersPage() {
@@ -190,7 +194,7 @@ export default function MonstersPage() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                marginTop: 24,
+                marginTop: 22,
               }}
             >
               <button type="submit" className="mainButton">

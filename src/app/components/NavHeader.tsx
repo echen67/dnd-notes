@@ -13,7 +13,9 @@ const navStyle = {
 const linkStyle = (isActive: boolean) => {
   return {
     marginRight: 32,
+    color: "black",
     fontWeight: isActive ? "bold" : "normal",
+    textDecoration: "none",
   };
 };
 

@@ -1,22 +1,26 @@
 h1 {
   font-size: 40;
   font-weight: bold;
+  margin: 0;
 }
 
 h2 {
   font-size: 32;
   font-weight: bold;
   color: #5b160c;
+  margin: 0;
 }
 
 h3 {
   font-size: 24;
   font-weight: bold;
   color: #5b160c;
+  margin: 0;
 }
 
 p {
   font-size: 14;
+  margin: 0;
 }
 
 .mainButton {
@@ -24,6 +28,7 @@ p {
   color: white;
   font-weight: bold;
   height: 48;
+  border: none;
   border-radius: 8;
   padding: 8;
   cursor: pointer;

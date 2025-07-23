@@ -10,11 +10,12 @@ const paginationContainerStyle = {
 };
 const pageButtonStyle = {
   margin: 2,
-  padding: 4,
+  padding: 8,
   backgroundColor: "#eee",
   cursor: "pointer",
   borderRadius: 4,
   minWidth: 32,
+  border: "none",
 };
 
 export const Pagination = ({

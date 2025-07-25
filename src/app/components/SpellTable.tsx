@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { SpellData } from "./SpellData";
 import { Pagination } from "./Pagination";
+import { SortArrow } from "./SortArrow";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,11 @@ export const SpellTable = () => {
           onClick={() => handleClickSort(ORDER_BY_LEVEL)}
         >
           Level
+          <SortArrow
+            orderByField={orderByField}
+            orderByAsc={orderByAsc}
+            field={ORDER_BY_LEVEL}
+          />
         </div>
         <div
           className="tableHeader"
@@ -57,6 +63,11 @@ export const SpellTable = () => {
           onClick={() => handleClickSort(ORDER_BY_NAME)}
         >
           Name
+          <SortArrow
+            orderByField={orderByField}
+            orderByAsc={orderByAsc}
+            field={ORDER_BY_NAME}
+          />
         </div>
         <div className="tableHeader" style={{ width: "10%" }}>
           Casting Time

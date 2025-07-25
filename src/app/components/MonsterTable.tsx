@@ -5,6 +5,7 @@ import { Pagination } from "./Pagination";
 import { useSearchParams } from "next/navigation";
 import { getMonsters } from "../api";
 import { MonsterData } from "./MonsterData";
+import { SortArrow } from "./SortArrow";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +74,11 @@ export const MonsterTable = ({
           onClick={() => handleClickSort(ORDER_BY_NAME)}
         >
           Name
+          <SortArrow
+            orderByField={orderByField}
+            orderByAsc={orderByAsc}
+            field={ORDER_BY_NAME}
+          />
         </div>
         <div
           className="tableHeader"
@@ -80,6 +86,11 @@ export const MonsterTable = ({
           onClick={() => handleClickSort(ORDER_BY_CR)}
         >
           CR
+          <SortArrow
+            orderByField={orderByField}
+            orderByAsc={orderByAsc}
+            field={ORDER_BY_CR}
+          />
         </div>
         <div
           className="tableHeader"
@@ -87,6 +98,11 @@ export const MonsterTable = ({
           onClick={() => handleClickSort(ORDER_BY_TYPE)}
         >
           Type
+          <SortArrow
+            orderByField={orderByField}
+            orderByAsc={orderByAsc}
+            field={ORDER_BY_TYPE}
+          />
         </div>
         <div
           className="tableHeader"
@@ -94,6 +110,11 @@ export const MonsterTable = ({
           onClick={() => handleClickSort(ORDER_BY_SIZE)}
         >
           Size
+          <SortArrow
+            orderByField={orderByField}
+            orderByAsc={orderByAsc}
+            field={ORDER_BY_SIZE}
+          />
         </div>
         <div className="tableHeader" style={{ width: "30%" }}>
           Alignment

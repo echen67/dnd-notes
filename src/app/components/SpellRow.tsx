@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { getSpellDetails } from "../api";
+import { SpellDetails } from "./SpellDetails";
+
 export const SpellRow = ({
   index,
   name,
@@ -15,9 +19,21 @@ export const SpellRow = ({
   range: string;
   damage: string;
 }) => {
+  const [openDetails, setOpenDetails] = useState(false);
+  const [spellDetails, setSpellDetails] = useState<any>(null);
+
+  const handleClickRow = async () => {
+    // TODO: only make API call if spellDetails is null and is currently closed; this prevents duplicate API calls if user opens/closes row repeatedly
+    const details = await getSpellDetails(index);
+    console.log("spell details: ", details);
+    setSpellDetails(details);
+
+    setOpenDetails((prevState) => !prevState);
+  };
+
   return (
     <>
-      <div key={index} className="tableRow">
+      <div key={index} className="tableRow" onClick={handleClickRow}>
         <div className="tableCell" style={{ width: "10%" }}>
           image
         </div>
@@ -40,7 +56,9 @@ export const SpellRow = ({
           {damage}
         </div>
       </div>
-      {/* TODO: spell details */}
+      {openDetails && spellDetails && (
+        <SpellDetails spellDetails={spellDetails} />
+      )}
     </>
   );
 };

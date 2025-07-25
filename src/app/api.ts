@@ -17,3 +17,9 @@ export async function getProficiencyInfo(skill: string) {
     res.json()
   );
 }
+
+export async function getSpellDetails(index: string) {
+  return fetch(`https://www.dnd5eapi.co/api/2014/spells/${index}`).then((res) =>
+    res.json()
+  );
+}

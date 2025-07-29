@@ -23,6 +23,7 @@ export const SortArrow = ({
         marginLeft: 4,
         objectFit: "contain",
         opacity: orderByField === field ? 1 : 0.25,
+        cursor: "pointer",
       }}
     />
   );

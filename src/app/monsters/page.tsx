@@ -3,35 +3,8 @@ import { useState } from "react";
 import { Page } from "../components/Page";
 import { MonsterTable } from "../components/MonsterTable";
 
-const inputStyle = {
-  border: "1px solid gray",
-  borderRadius: 8,
-  paddingLeft: 8,
-  height: 44,
-};
-
-const selectStyle = {
-  border: "1px solid gray",
-  borderRadius: 8,
-  paddingLeft: 8,
-  height: 48,
-};
-
-const secondaryButtonStyle = {
-  color: "red",
-  cursor: "pointer",
-  fontWeight: "bold",
-  border: "none",
-  backgroundColor: "transparent",
-  marginTop: 4,
-};
-
-const labelStyle = {
-  fontWeight: "bold",
-  marginBottom: 4,
-};
-
 export default function MonstersPage() {
+  // TODO: coalesce into one object state
   const [monsterSearch, setMonsterSearch] = useState("");
   const [monsterSize, setMonsterSize] = useState("");
   const [monsterType, setMonsterType] = useState("");
@@ -64,7 +37,7 @@ export default function MonstersPage() {
           }}
         >
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="monstername" style={labelStyle}>
+            <label htmlFor="monstername" className="label">
               Monster Name
             </label>
             <input
@@ -73,7 +46,7 @@ export default function MonstersPage() {
               value={monsterSearch}
               onChange={(e) => setMonsterSearch(e.target.value)}
               placeholder="Search Monster"
-              style={inputStyle}
+              className="textbox"
             />
           </div>
 
@@ -84,13 +57,13 @@ export default function MonstersPage() {
               marginLeft: 8,
             }}
           >
-            <label htmlFor="size" style={labelStyle}>
+            <label htmlFor="size" className="label">
               Size
             </label>
             <select
               name="size"
               id="size"
-              style={selectStyle}
+              className="dropdown"
               value={monsterSize}
               onChange={(e) => setMonsterSize(e.target.value)}
             >
@@ -111,13 +84,13 @@ export default function MonstersPage() {
               marginLeft: 8,
             }}
           >
-            <label htmlFor="type" style={labelStyle}>
+            <label htmlFor="type" className="label">
               Type
             </label>
             <select
               name="type"
               id="type"
-              style={selectStyle}
+              className="dropdown"
               value={monsterType}
               onChange={(e) => setMonsterType(e.target.value)}
             >
@@ -147,14 +120,15 @@ export default function MonstersPage() {
               marginLeft: 8,
             }}
           >
-            <label htmlFor="cr" style={labelStyle}>
+            <label htmlFor="cr" className="label">
               Challenge Rating
             </label>
             <div style={{ display: "flex" }}>
               <select
                 name="cr_lower"
                 id="cr_lower"
-                style={{ ...selectStyle, width: 80 }}
+                className="dropdown"
+                style={{ width: 80 }}
                 value={monsterCRLower}
                 onChange={(e) => setMonsterCRLower(e.target.value)}
               >
@@ -169,7 +143,8 @@ export default function MonstersPage() {
               <select
                 name="cr_upper"
                 id="cr_upper"
-                style={{ ...selectStyle, marginLeft: 8, width: 80 }}
+                className="dropdown"
+                style={{ marginLeft: 8, width: 80 }}
                 value={monsterCRUpper}
                 onChange={(e) => setMonsterCRUpper(e.target.value)}
               >
@@ -194,7 +169,7 @@ export default function MonstersPage() {
             <button type="submit" className="mainButton">
               Search
             </button>
-            <button onClick={resetFilters} style={secondaryButtonStyle}>
+            <button onClick={resetFilters} className="secondaryButton">
               Reset Filters
             </button>
           </div>

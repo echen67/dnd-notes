@@ -23,6 +23,20 @@ p {
   margin: 0;
 }
 
+.textbox {
+  border: 1px solid gray;
+  border-radius: 8;
+  padding-left: 8;
+  height: 44;
+}
+
+.dropdown {
+  border: 1px solid gray;
+  border-radius: 8;
+  padding-left: 8;
+  height: 48;
+}
+
 .mainButton {
   background-color: red;
   color: white;
@@ -32,7 +46,6 @@ p {
   border-radius: 8;
   padding: 8;
   cursor: pointer;
-  margin-left: 8;
   width: 180;
 }
 
@@ -40,10 +53,24 @@ p {
   background-color: #e82b0e;
 }
 
+.secondaryButton {
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  margin-top: 4;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 4;
+}
+
 .tableHeader {
-  background-color: #ccc;
+  /* background-color: #ccc; */
   text-align: left;
-  padding: 8;
+  /* padding: 8; */
   font-weight: bold;
 }
 

@@ -6,13 +6,35 @@ export const SpellData = ({
   page,
   orderByField,
   orderByDirection,
+  spellSearch,
 }: {
   page: number;
   orderByField: string;
   orderByDirection: string;
+  spellSearch: any;
 }) => {
   const spellQuery = `query Spells {
-  spells (limit: ${PAGE_SIZE}, skip: ${
+  spells (name: "${spellSearch.spellName}", ${
+    spellSearch.spellClass && `class: "${spellSearch.spellClass}"`
+  }
+  ${spellSearch.spellLevel && `level: ${spellSearch.spellLevel}`} 
+  ${spellSearch.spellSchool && `school: "${spellSearch.spellSchool}"`} 
+  ${spellSearch.spellAttack && `attack_type: "${spellSearch.spellAttack}"`}
+  ${spellSearch.spellDamage && `damage_type: "${spellSearch.spellDamage}"`}
+  ${spellSearch.spellSave && `dc_type: "${spellSearch.spellSave}"`}
+  ${
+    spellSearch.spellCastingTime &&
+    `casting_time: "${spellSearch.spellCastingTime}"`
+  }
+  ${
+    spellSearch.spellConcentration &&
+    `concentration: ${spellSearch.spellConcentration === "1" ? true : false}`
+  }
+  ${
+    spellSearch.spellRitual &&
+    `ritual: ${spellSearch.spellRitual === "1" ? true : false}`
+  }
+  limit: ${PAGE_SIZE}, skip: ${
     page * PAGE_SIZE
   }, order: {by: ${orderByField}, direction: ${orderByDirection}}) {
     index
@@ -27,12 +49,15 @@ export const SpellData = ({
         desc
       }
     }
+    school {
+      name
+    }
     attack_type
   }
 }`;
 
   const { isPending, error, data } = useQuery({
-    queryKey: [page, orderByField, orderByDirection],
+    queryKey: [page, orderByField, orderByDirection, spellSearch],
     queryFn: () =>
       fetch("https://www.dnd5eapi.co/graphql/2014", {
         method: "POST",
@@ -50,7 +75,7 @@ export const SpellData = ({
   //   if (isPending) return <tr>Loading...</tr>;
   //   if (error) return "An error has occurred: " + error.message;
 
-  console.log("spell data: ", data);
+  // console.log("spell data: ", data);
 
   return (
     <>

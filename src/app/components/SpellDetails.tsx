@@ -74,7 +74,6 @@ export const SpellDetails = ({
 
         <div style={{ width: "25%" }}>
           <p style={titleStyle}>COMPONENTS</p>
-          {/* TODO: also add * for materials if there are any */}
           <p>
             {spellDetails.components.join(", ")} {spellDetails.material && "*"}
           </p>

@@ -14,7 +14,7 @@ const ORDER_BY_LEVEL = "LEVEL";
 const ORDER_BY_ASC = "ASC";
 const ORDER_BY_DESC = "DESC";
 
-export const SpellTable = () => {
+export const SpellTable = ({ spellSearch }: { spellSearch: any }) => {
   const searchParams = useSearchParams();
   const pageParam = searchParams.get("page");
 
@@ -47,10 +47,10 @@ export const SpellTable = () => {
         </div>
         <div
           className="tableHeader"
-          style={{ width: "10%" }}
+          style={{ width: "10%", display: "flex", alignItems: "center" }}
           onClick={() => handleClickSort(ORDER_BY_LEVEL)}
         >
-          Level
+          <p style={{ cursor: "pointer", fontSize: 16 }}>Level</p>
           <SortArrow
             orderByField={orderByField}
             orderByAsc={orderByAsc}
@@ -59,10 +59,10 @@ export const SpellTable = () => {
         </div>
         <div
           className="tableHeader"
-          style={{ width: "20%" }}
+          style={{ width: "20%", display: "flex", alignItems: "center" }}
           onClick={() => handleClickSort(ORDER_BY_NAME)}
         >
-          Name
+          <p style={{ cursor: "pointer", fontSize: 16 }}>Name</p>
           <SortArrow
             orderByField={orderByField}
             orderByAsc={orderByAsc}
@@ -87,6 +87,7 @@ export const SpellTable = () => {
         page={page}
         orderByField={orderByField}
         orderByDirection={orderByAsc ? ORDER_BY_ASC : ORDER_BY_DESC}
+        spellSearch={spellSearch}
       />
 
       <Pagination

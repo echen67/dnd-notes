@@ -51,6 +51,14 @@ type InnerType = {
   url: string;
 };
 
+export type MonsterSearch = {
+  monsterName: string;
+  monsterSize: string;
+  monsterType: string;
+  monsterCRLower: string;
+  monsterCRUpper: string;
+};
+
 export type MonsterType = {
   alignment: string;
   challenge_rating: number;

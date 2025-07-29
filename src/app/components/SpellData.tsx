@@ -8,11 +8,13 @@ export const SpellData = ({
   orderByField,
   orderByDirection,
   spellSearch,
+  doSearch,
 }: {
   page: number;
   orderByField: string;
   orderByDirection: string;
   spellSearch: SpellSearchType;
+  doSearch: boolean;
 }) => {
   const spellQuery = `query Spells {
   spells (name: "${spellSearch.spellName}", ${
@@ -58,7 +60,7 @@ export const SpellData = ({
 }`;
 
   const { isPending, error, data } = useQuery({
-    queryKey: [page, orderByField, orderByDirection, spellSearch],
+    queryKey: [page, orderByField, orderByDirection, doSearch],
     queryFn: () =>
       fetch("https://www.dnd5eapi.co/graphql/2014", {
         method: "POST",

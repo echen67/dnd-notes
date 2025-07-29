@@ -24,10 +24,12 @@ export const SpellRow = ({
   const [spellDetails, setSpellDetails] = useState<SpellDetailsType>(null);
 
   const handleClickRow = async () => {
-    // TODO: only make API call if spellDetails is null and is currently closed; this prevents duplicate API calls if user opens/closes row repeatedly
-    const details = await getSpellDetails(index);
-    console.log("spell details: ", details);
-    setSpellDetails(details);
+    // Only make API call if spellDetails is null and is currently closed;
+    // this prevents duplicate API calls if user opens/closes row repeatedly
+    if (!openDetails && spellDetails === null) {
+      const details = await getSpellDetails(index);
+      setSpellDetails(details);
+    }
 
     setOpenDetails((prevState) => !prevState);
   };

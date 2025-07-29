@@ -2,27 +2,28 @@
 import { useState } from "react";
 import { Page } from "../components/Page";
 import { MonsterTable } from "../components/MonsterTable";
+import { MonsterSearch } from "../types";
+
+const emptyMonsterSearch = {
+  monsterName: "",
+  monsterSize: "",
+  monsterType: "",
+  monsterCRLower: "",
+  monsterCRUpper: "",
+};
 
 export default function MonstersPage() {
-  // TODO: coalesce into one object state
-  const [monsterSearch, setMonsterSearch] = useState("");
-  const [monsterSize, setMonsterSize] = useState("");
-  const [monsterType, setMonsterType] = useState("");
-  const [monsterCRLower, setMonsterCRLower] = useState("");
-  const [monsterCRUpper, setMonsterCRUpper] = useState("");
+  const [monsterSearch, setMonsterSearch] =
+    useState<MonsterSearch>(emptyMonsterSearch);
+  const [doSearch, setDoSearch] = useState(false);
 
-  // TODO: make it so filters only go through once user hits search button
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("submitted form");
+    setDoSearch((prevState) => !prevState);
   };
 
   const resetFilters = () => {
-    setMonsterSearch("");
-    setMonsterSize("");
-    setMonsterType("");
-    setMonsterCRLower("");
-    setMonsterCRUpper("");
+    setMonsterSearch(emptyMonsterSearch);
   };
 
   return (
@@ -36,25 +37,33 @@ export default function MonstersPage() {
             marginTop: 16,
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          {/* NAME */}
+          <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
             <label htmlFor="monstername" className="label">
               Monster Name
             </label>
             <input
               type="text"
               id="monstername"
-              value={monsterSearch}
-              onChange={(e) => setMonsterSearch(e.target.value)}
+              value={monsterSearch.monsterName}
+              onChange={(e) =>
+                setMonsterSearch({
+                  ...monsterSearch,
+                  monsterName: e.target.value,
+                })
+              }
               placeholder="Search Monster"
               className="textbox"
             />
           </div>
 
+          {/* SIZE */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              marginLeft: 8,
+              marginLeft: 16,
+              flex: 1,
             }}
           >
             <label htmlFor="size" className="label">
@@ -64,8 +73,13 @@ export default function MonstersPage() {
               name="size"
               id="size"
               className="dropdown"
-              value={monsterSize}
-              onChange={(e) => setMonsterSize(e.target.value)}
+              value={monsterSearch.monsterSize}
+              onChange={(e) =>
+                setMonsterSearch({
+                  ...monsterSearch,
+                  monsterSize: e.target.value,
+                })
+              }
             >
               <option value="">--</option>
               <option value="Tiny">Tiny</option>
@@ -77,11 +91,13 @@ export default function MonstersPage() {
             </select>
           </div>
 
+          {/* TYPE */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              marginLeft: 8,
+              marginLeft: 16,
+              flex: 1,
             }}
           >
             <label htmlFor="type" className="label">
@@ -91,8 +107,13 @@ export default function MonstersPage() {
               name="type"
               id="type"
               className="dropdown"
-              value={monsterType}
-              onChange={(e) => setMonsterType(e.target.value)}
+              value={monsterSearch.monsterType}
+              onChange={(e) =>
+                setMonsterSearch({
+                  ...monsterSearch,
+                  monsterType: e.target.value,
+                })
+              }
             >
               <option value="">--</option>
               <option value="aberration">Aberration</option>
@@ -113,11 +134,13 @@ export default function MonstersPage() {
             </select>
           </div>
 
+          {/* CR */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              marginLeft: 8,
+              marginLeft: 16,
+              flex: 1,
             }}
           >
             <label htmlFor="cr" className="label">
@@ -128,9 +151,14 @@ export default function MonstersPage() {
                 name="cr_lower"
                 id="cr_lower"
                 className="dropdown"
-                style={{ width: 80 }}
-                value={monsterCRLower}
-                onChange={(e) => setMonsterCRLower(e.target.value)}
+                style={{ width: "100%" }}
+                value={monsterSearch.monsterCRLower}
+                onChange={(e) =>
+                  setMonsterSearch({
+                    ...monsterSearch,
+                    monsterCRLower: e.target.value,
+                  })
+                }
               >
                 <option value={""}>--</option>
                 <option value={0}>0</option>
@@ -144,9 +172,14 @@ export default function MonstersPage() {
                 name="cr_upper"
                 id="cr_upper"
                 className="dropdown"
-                style={{ marginLeft: 8, width: 80 }}
-                value={monsterCRUpper}
-                onChange={(e) => setMonsterCRUpper(e.target.value)}
+                style={{ marginLeft: 8, width: "100%" }}
+                value={monsterSearch.monsterCRUpper}
+                onChange={(e) =>
+                  setMonsterSearch({
+                    ...monsterSearch,
+                    monsterCRUpper: e.target.value,
+                  })
+                }
               >
                 <option value={""}>--</option>
                 <option value={0}>0</option>
@@ -159,11 +192,14 @@ export default function MonstersPage() {
             </div>
           </div>
 
+          {/* BUTTONS */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               marginTop: 22,
+              marginLeft: 16,
+              flex: 1,
             }}
           >
             <button type="submit" className="mainButton">
@@ -176,13 +212,7 @@ export default function MonstersPage() {
         </div>
       </form>
 
-      <MonsterTable
-        monsterSearch={monsterSearch}
-        monsterSize={monsterSize}
-        monsterType={monsterType}
-        monsterCRLower={monsterCRLower}
-        monsterCRUpper={monsterCRUpper}
-      />
+      <MonsterTable monsterSearch={monsterSearch} doSearch={doSearch} />
     </Page>
   );
 }

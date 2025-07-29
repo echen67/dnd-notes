@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { getMonsters } from "../api";
 import { MonsterData } from "./MonsterData";
 import { SortArrow } from "./SortArrow";
+import { MonsterSearch } from "../types";
 
 const queryClient = new QueryClient();
 
@@ -19,16 +20,10 @@ const ORDER_BY_DESC = "DESC";
 
 export const MonsterTable = ({
   monsterSearch,
-  monsterSize,
-  monsterType,
-  monsterCRLower,
-  monsterCRUpper,
+  doSearch,
 }: {
-  monsterSearch: string;
-  monsterSize: string;
-  monsterType: string;
-  monsterCRLower: string;
-  monsterCRUpper: string;
+  monsterSearch: MonsterSearch;
+  doSearch: boolean;
 }) => {
   const searchParams = useSearchParams();
   const pageParam = searchParams.get("page");
@@ -126,10 +121,7 @@ export const MonsterTable = ({
         orderByField={orderByField}
         orderByDirection={orderByAsc ? ORDER_BY_ASC : ORDER_BY_DESC}
         monsterSearch={monsterSearch}
-        monsterSize={monsterSize}
-        monsterType={monsterType}
-        monsterCRLower={monsterCRLower}
-        monsterCRUpper={monsterCRUpper}
+        doSearch={doSearch}
       />
 
       <Pagination

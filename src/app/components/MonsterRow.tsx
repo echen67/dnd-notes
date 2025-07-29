@@ -26,17 +26,13 @@ export const MonsterRow = ({
   const [monsterDetails, setMonsterDetails] =
     useState<MonsterDetailsType>(null);
 
-  //   useEffect(() => {
-  //     const details = getMonsterDetails(index).then((res) => {
-  //       console.log("monster details: ", details);
-  //     });
-  //   }, [index]);
-
   const handleClickRow = async () => {
-    // TODO: only make API call if monsterDetails is null and is currently closed; this prevents duplicate API calls if user opens/closes row repeatedly
-    const details = await getMonsterDetails(index);
-    console.log("monster details: ", details);
-    setMonsterDetails(details);
+    // Only make API call if monsterDetails is null and is currently closed;
+    // this prevents duplicate API calls if user opens/closes row repeatedly
+    if (!openDetails && monsterDetails === null) {
+      const details = await getMonsterDetails(index);
+      setMonsterDetails(details);
+    }
 
     setOpenDetails((prevState) => !prevState);
   };

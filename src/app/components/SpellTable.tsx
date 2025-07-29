@@ -17,8 +17,10 @@ const ORDER_BY_DESC = "DESC";
 
 export const SpellTable = ({
   spellSearch,
+  doSearch,
 }: {
   spellSearch: SpellSearchType;
+  doSearch: boolean;
 }) => {
   const searchParams = useSearchParams();
   const pageParam = searchParams.get("page");
@@ -93,6 +95,7 @@ export const SpellTable = ({
         orderByField={orderByField}
         orderByDirection={orderByAsc ? ORDER_BY_ASC : ORDER_BY_DESC}
         spellSearch={spellSearch}
+        doSearch={doSearch}
       />
 
       <Pagination

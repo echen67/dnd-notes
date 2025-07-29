@@ -1,31 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
 import { MonsterRow } from "./MonsterRow";
 import { PAGE_SIZE } from "./MonsterTable";
-import { MonsterType } from "../types";
+import { MonsterType, MonsterSearch } from "../types";
 
 export const MonsterData = ({
   page,
   orderByField,
   orderByDirection,
   monsterSearch,
-  monsterSize,
-  monsterType,
-  monsterCRLower,
-  monsterCRUpper,
+  doSearch,
 }: {
   page: number;
   orderByField: string;
   orderByDirection: string;
-  monsterSearch: string;
-  monsterSize: string;
-  monsterType: string;
-  monsterCRLower: string;
-  monsterCRUpper: string;
+  monsterSearch: MonsterSearch;
+  doSearch: boolean;
 }) => {
   const monsterQuery = `query Monsters {
-    monsters (name: "${monsterSearch}", size: "${monsterSize}", type: "${monsterType}", 
-    challenge_rating: { range: { gte: ${monsterCRLower || 0}, lte: ${
-    monsterCRUpper || 30
+    monsters (name: "${monsterSearch.monsterName}", size: "${
+    monsterSearch.monsterSize
+  }", type: "${monsterSearch.monsterType}", 
+    challenge_rating: { range: { gte: ${
+      monsterSearch.monsterCRLower || 0
+    }, lte: ${
+    monsterSearch.monsterCRUpper || 30
   } } } limit: ${PAGE_SIZE}, skip: ${
     page * PAGE_SIZE
   }, order: {by: ${orderByField}, direction: ${orderByDirection}}) {
@@ -40,16 +38,7 @@ export const MonsterData = ({
   }`;
 
   const { isPending, error, data } = useQuery({
-    queryKey: [
-      page,
-      orderByField,
-      orderByDirection,
-      monsterSearch,
-      monsterSize,
-      monsterType,
-      monsterCRLower,
-      monsterCRUpper,
-    ],
+    queryKey: [page, orderByField, orderByDirection, doSearch],
     queryFn: () =>
       fetch("https://www.dnd5eapi.co/graphql/2014", {
         method: "POST",

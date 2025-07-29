@@ -4,52 +4,45 @@ import { Page } from "../components/Page";
 import { SpellTable } from "../components/SpellTable";
 import { SpellSearchType } from "../types";
 
+const emptySpellSearch = {
+  spellName: "",
+  spellClass: "",
+  spellLevel: "",
+  spellSchool: "",
+  spellAttack: "",
+  spellDamage: "",
+  spellSave: "",
+  spellCastingTime: "",
+  spellConcentration: "",
+  spellRitual: "",
+};
+
 export default function SpellsPage() {
-  const [spellSearch, setSpellSearch] = useState<SpellSearchType>({
-    spellName: "",
-    spellClass: "",
-    spellLevel: "",
-    spellSchool: "",
-    spellAttack: "",
-    spellDamage: "",
-    spellSave: "",
-    spellCastingTime: "",
-    spellConcentration: "",
-    spellRitual: "",
-  });
+  const [spellSearch, setSpellSearch] =
+    useState<SpellSearchType>(emptySpellSearch);
+  const [doSearch, setDoSearch] = useState(false);
 
   // TODO: make it so filters only go through once user hits search button
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("submitted spell form");
+    setDoSearch((prevState) => !prevState);
   };
 
   const resetFilters = () => {
-    setSpellSearch({
-      spellName: "",
-      spellClass: "",
-      spellLevel: "",
-      spellSchool: "",
-      spellAttack: "",
-      spellDamage: "",
-      spellSave: "",
-      spellCastingTime: "",
-      spellConcentration: "",
-      spellRitual: "",
-    });
+    setSpellSearch(emptySpellSearch);
   };
 
   return (
     <Page>
       <h1>Spells</h1>
       <form onSubmit={handleSubmit}>
-        {/* NAME */}
         <div
           style={{
             display: "flex",
             marginTop: 16,
           }}
         >
+          {/* NAME */}
           <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
             <label htmlFor="spellname" className="label">
               Spell Name
@@ -211,6 +204,7 @@ export default function SpellsPage() {
               flexDirection: "column",
               marginTop: 22,
               marginLeft: 16,
+              flex: 1,
             }}
           >
             <button type="submit" className="mainButton">
@@ -381,7 +375,7 @@ export default function SpellsPage() {
         </div>
       </form>
 
-      <SpellTable spellSearch={spellSearch} />
+      <SpellTable spellSearch={spellSearch} doSearch={doSearch} />
     </Page>
   );
 }

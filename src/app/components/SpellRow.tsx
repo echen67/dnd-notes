@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getSpellDetails } from "../api";
 import { SpellDetails } from "./SpellDetails";
+import { SpellDetailsType } from "../types";
 
 export const SpellRow = ({
   index,
@@ -20,7 +21,7 @@ export const SpellRow = ({
   damage: string;
 }) => {
   const [openDetails, setOpenDetails] = useState(false);
-  const [spellDetails, setSpellDetails] = useState<any>(null);
+  const [spellDetails, setSpellDetails] = useState<SpellDetailsType>(null);
 
   const handleClickRow = async () => {
     // TODO: only make API call if spellDetails is null and is currently closed; this prevents duplicate API calls if user opens/closes row repeatedly

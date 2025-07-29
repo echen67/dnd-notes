@@ -2,19 +2,7 @@
 import { useState } from "react";
 import { Page } from "../components/Page";
 import { SpellTable } from "../components/SpellTable";
-
-type SpellSearchType = {
-  spellName: string;
-  spellClass: string;
-  spellLevel: string;
-  spellSchool: string;
-  spellAttack: string;
-  spellDamage: string;
-  spellSave: string;
-  spellCastingTime: string;
-  spellConcentration: string;
-  spellRitual: string;
-};
+import { SpellSearchType } from "../types";
 
 export default function SpellsPage() {
   const [spellSearch, setSpellSearch] = useState<SpellSearchType>({

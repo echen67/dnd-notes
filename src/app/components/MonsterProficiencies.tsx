@@ -2,15 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Tooltip } from "./Tooltip";
 import { getProficiencyInfo } from "../api";
 import { formatString } from "../utils";
-
-type Proficiency = {
-  proficiency: {
-    index: string;
-    name: string;
-    url: string;
-  };
-  value: number;
-};
+import { Proficiency } from "../types";
 
 export const MonsterProficiences = ({
   proficiencies,

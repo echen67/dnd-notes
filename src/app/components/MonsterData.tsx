@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { MonsterRow } from "./MonsterRow";
 import { PAGE_SIZE } from "./MonsterTable";
+import { MonsterType } from "../types";
 
 export const MonsterData = ({
   page,
@@ -68,7 +69,7 @@ export const MonsterData = ({
 
   return (
     <>
-      {data?.data?.monsters?.map((monster: any) => (
+      {data?.data?.monsters?.map((monster: MonsterType) => (
         <MonsterRow
           key={monster.index}
           index={monster.index}

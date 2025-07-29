@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BASE_URL, formatString } from "../utils";
 import { MonsterDetails } from "./MonsterDetails";
 import { getMonsterDetails } from "../api";
+import { MonsterDetailsType } from "../types";
 
 export const MonsterRow = ({
   index,
@@ -16,13 +17,14 @@ export const MonsterRow = ({
   index: string;
   image: string;
   name: string;
-  cr: string;
+  cr: number;
   type: string;
   size: string;
   alignment: string;
 }) => {
   const [openDetails, setOpenDetails] = useState(false);
-  const [monsterDetails, setMonsterDetails] = useState<any>(null);
+  const [monsterDetails, setMonsterDetails] =
+    useState<MonsterDetailsType>(null);
 
   //   useEffect(() => {
   //     const details = getMonsterDetails(index).then((res) => {

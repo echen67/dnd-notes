@@ -1,44 +1,5 @@
 import { Divider } from "./Divider";
-
-type SpellDetailsType = {
-  area_of_effect?: {
-    size: number;
-    type: string;
-  };
-  attack_type?: string;
-  casting_time: string;
-  classes: InnerType[];
-  components: string[];
-  concentration: boolean;
-  damage?: {
-    damage_type: InnerType;
-    damage_at_character_level: any;
-  };
-  dc?: {
-    dc_success: "none";
-    dc_type: InnerType;
-  };
-  desc: string[];
-  duration: string;
-  higher_level: string[];
-  index: string;
-  level: number;
-  material?: string;
-  name: string;
-  range: string;
-  ritual: boolean;
-  school: InnerType;
-  subclasses: InnerType[];
-  updated_at: string;
-  url: string;
-};
-
-// TODO: come up with a better name lol
-type InnerType = {
-  index: string;
-  name: string;
-  url: string;
-};
+import { SpellDetailsType } from "../types";
 
 const titleStyle = {
   fontWeight: "bold",

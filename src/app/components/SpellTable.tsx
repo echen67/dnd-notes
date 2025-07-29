@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { SpellData } from "./SpellData";
 import { Pagination } from "./Pagination";
 import { SortArrow } from "./SortArrow";
+import { SpellSearchType } from "../types";
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,11 @@ const ORDER_BY_LEVEL = "LEVEL";
 const ORDER_BY_ASC = "ASC";
 const ORDER_BY_DESC = "DESC";
 
-export const SpellTable = ({ spellSearch }: { spellSearch: any }) => {
+export const SpellTable = ({
+  spellSearch,
+}: {
+  spellSearch: SpellSearchType;
+}) => {
   const searchParams = useSearchParams();
   const pageParam = searchParams.get("page");
 

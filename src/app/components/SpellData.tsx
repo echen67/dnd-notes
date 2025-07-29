@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { SpellRow } from "./SpellRow";
 import { PAGE_SIZE } from "./SpellTable";
+import { SpellSearchType } from "../types";
 
 export const SpellData = ({
   page,
@@ -11,7 +12,7 @@ export const SpellData = ({
   page: number;
   orderByField: string;
   orderByDirection: string;
-  spellSearch: any;
+  spellSearch: SpellSearchType;
 }) => {
   const spellQuery = `query Spells {
   spells (name: "${spellSearch.spellName}", ${

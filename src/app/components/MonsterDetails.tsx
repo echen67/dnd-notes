@@ -1,15 +1,16 @@
-import { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 import { formatString } from "../utils";
 import { MonsterProficiences } from "./MonsterProficiencies";
 import { Divider } from "./Divider";
+import { MonsterDetailsType, MonsterActionType } from "../types";
 
-const BoldItalicSpan = ({ children }: { children: any }) => {
+const BoldItalicSpan = ({ children }: { children: ReactNode }) => {
   return (
     <span style={{ fontWeight: "bold", fontStyle: "italic" }}>{children}</span>
   );
 };
 
-const StatBlock = ({ children }: { children: any }) => (
+const StatBlock = ({ children }: { children: ReactNode }) => (
   <div
     style={{
       display: "flex",
@@ -22,7 +23,11 @@ const StatBlock = ({ children }: { children: any }) => (
   </div>
 );
 
-export const MonsterDetails = ({ monsterDetails }: { monsterDetails: any }) => {
+export const MonsterDetails = ({
+  monsterDetails,
+}: {
+  monsterDetails: MonsterDetailsType;
+}) => {
   return (
     <div className="detailPanel">
       <h2>{monsterDetails.name}</h2>
@@ -111,14 +116,20 @@ export const MonsterDetails = ({ monsterDetails }: { monsterDetails: any }) => {
         <div style={{ marginTop: 24 }}>
           <h3>Special Abilities</h3>
           <Divider />
-          {monsterDetails.special_abilities.map((item: any) => (
-            <p
-              style={{ marginBottom: 8, whiteSpace: "break-spaces" }}
-              key={item.name}
-            >
-              <BoldItalicSpan>{item.name}.</BoldItalicSpan> {item.desc}
-            </p>
-          ))}
+          {monsterDetails.special_abilities.map(
+            (item: { name: string; desc: string }) => (
+              <p
+                style={{
+                  marginBottom: 8,
+                  whiteSpace: "break-spaces",
+                  lineHeight: 1.5,
+                }}
+                key={item.name}
+              >
+                <BoldItalicSpan>{item.name}.</BoldItalicSpan> {item.desc}
+              </p>
+            )
+          )}
         </div>
       )}
 
@@ -127,9 +138,13 @@ export const MonsterDetails = ({ monsterDetails }: { monsterDetails: any }) => {
         <div style={{ marginTop: 24 }}>
           <h3>Actions</h3>
           <Divider />
-          {monsterDetails.actions.map((item: any) => (
+          {monsterDetails.actions.map((item: MonsterActionType) => (
             <p
-              style={{ marginBottom: 8, whiteSpace: "break-spaces" }}
+              style={{
+                marginBottom: 8,
+                whiteSpace: "break-spaces",
+                lineHeight: 1.5,
+              }}
               key={item.name}
             >
               <BoldItalicSpan>{item.name}.</BoldItalicSpan> {item.desc}
@@ -143,14 +158,20 @@ export const MonsterDetails = ({ monsterDetails }: { monsterDetails: any }) => {
         <div style={{ marginTop: 24 }}>
           <h3>Legendary Actions</h3>
           <Divider />
-          {monsterDetails.legendary_actions.map((item: any) => (
-            <p
-              style={{ marginBottom: 8, whiteSpace: "break-spaces" }}
-              key={item.name}
-            >
-              <BoldItalicSpan>{item.name}.</BoldItalicSpan> {item.desc}
-            </p>
-          ))}
+          {monsterDetails.legendary_actions.map(
+            (item: { name: string; desc: string }) => (
+              <p
+                style={{
+                  marginBottom: 8,
+                  whiteSpace: "break-spaces",
+                  lineHeight: 1.5,
+                }}
+                key={item.name}
+              >
+                <BoldItalicSpan>{item.name}.</BoldItalicSpan> {item.desc}
+              </p>
+            )
+          )}
         </div>
       )}
     </div>

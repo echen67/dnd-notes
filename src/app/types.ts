@@ -11,6 +11,28 @@ export type SpellSearchType = {
   spellRitual: string;
 };
 
+export type SpellType = {
+  attack_type?: string;
+  area_of_effect?: {
+    size: number;
+    type: string;
+  };
+  casting_time: string;
+  components: string[];
+  damage?: {
+    damage_type: {
+      desc: string[];
+      name: string;
+    };
+  };
+  duration: string;
+  index: string;
+  level: number;
+  name: string;
+  range: string;
+  school: { name: string };
+};
+
 export type SpellDetailsType = {
   area_of_effect?: {
     size: number;

@@ -63,53 +63,57 @@ export const MonsterTable = ({
         <div className="tableHeader" style={{ width: "10%" }}>
           Image
         </div>
-        <div
-          className="tableHeader"
-          style={{ width: "20%" }}
-          onClick={() => handleClickSort(ORDER_BY_NAME)}
-        >
-          Name
-          <SortArrow
-            orderByField={orderByField}
-            orderByAsc={orderByAsc}
-            field={ORDER_BY_NAME}
-          />
+        <div className="tableHeader" style={{ width: "20%" }}>
+          <div
+            style={{ cursor: "pointer", width: "fit-content" }}
+            onClick={() => handleClickSort(ORDER_BY_NAME)}
+          >
+            Name
+            <SortArrow
+              orderByField={orderByField}
+              orderByAsc={orderByAsc}
+              field={ORDER_BY_NAME}
+            />
+          </div>
         </div>
-        <div
-          className="tableHeader"
-          style={{ width: "10%" }}
-          onClick={() => handleClickSort(ORDER_BY_CR)}
-        >
-          CR
-          <SortArrow
-            orderByField={orderByField}
-            orderByAsc={orderByAsc}
-            field={ORDER_BY_CR}
-          />
+        <div className="tableHeader" style={{ width: "10%" }}>
+          <div
+            style={{ cursor: "pointer", width: "fit-content" }}
+            onClick={() => handleClickSort(ORDER_BY_CR)}
+          >
+            CR
+            <SortArrow
+              orderByField={orderByField}
+              orderByAsc={orderByAsc}
+              field={ORDER_BY_CR}
+            />
+          </div>
         </div>
-        <div
-          className="tableHeader"
-          style={{ width: "20%" }}
-          onClick={() => handleClickSort(ORDER_BY_TYPE)}
-        >
-          Type
-          <SortArrow
-            orderByField={orderByField}
-            orderByAsc={orderByAsc}
-            field={ORDER_BY_TYPE}
-          />
+        <div className="tableHeader" style={{ width: "20%" }}>
+          <div
+            style={{ cursor: "pointer", width: "fit-content" }}
+            onClick={() => handleClickSort(ORDER_BY_TYPE)}
+          >
+            Type
+            <SortArrow
+              orderByField={orderByField}
+              orderByAsc={orderByAsc}
+              field={ORDER_BY_TYPE}
+            />
+          </div>
         </div>
-        <div
-          className="tableHeader"
-          style={{ width: "10%" }}
-          onClick={() => handleClickSort(ORDER_BY_SIZE)}
-        >
-          Size
-          <SortArrow
-            orderByField={orderByField}
-            orderByAsc={orderByAsc}
-            field={ORDER_BY_SIZE}
-          />
+        <div className="tableHeader" style={{ width: "10%" }}>
+          <div
+            style={{ cursor: "pointer", width: "fit-content" }}
+            onClick={() => handleClickSort(ORDER_BY_SIZE)}
+          >
+            Size
+            <SortArrow
+              orderByField={orderByField}
+              orderByAsc={orderByAsc}
+              field={ORDER_BY_SIZE}
+            />
+          </div>
         </div>
         <div className="tableHeader" style={{ width: "30%" }}>
           Alignment

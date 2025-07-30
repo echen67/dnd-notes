@@ -25,16 +25,18 @@ p {
 
 .textbox {
   border: 1px solid gray;
-  border-radius: 8;
+  /* border-radius: 8; */
   padding-left: 8;
   height: 44;
+  box-shadow: inset 1px 1px 2px #ddd, inset -1px -1px 2px #ddd;
 }
 
 .dropdown {
   border: 1px solid gray;
-  border-radius: 8;
+  /* border-radius: 8; */
   padding-left: 8;
   height: 48;
+  box-shadow: inset 1px 1px 2px #ddd, inset -1px -1px 2px #ddd;
 }
 
 .mainButton {
@@ -89,7 +91,7 @@ p {
 
 .tableCell {
   /* background-color: #eee; */
-  padding: 8;
+  padding: 8px 8px 8px 0px;
   display: flex;
   align-items: center;
 }

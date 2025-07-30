@@ -46,7 +46,12 @@ export const MonsterRow = ({
             alt={name}
             width={32}
             height={32}
-            style={{ objectFit: "cover", minHeight: 32, maxHeight: 32 }}
+            style={{
+              objectFit: "cover",
+              minHeight: 32,
+              maxHeight: 32,
+              marginLeft: 8,
+            }}
           />
         </div>
         <div className="tableCell" style={{ width: "20%" }}>

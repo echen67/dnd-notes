@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Arrow from "../../../public/arrow.png";
+import Arrow from "../icons/arrow.png";
 
 export const SortArrow = ({
   orderByField,

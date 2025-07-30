@@ -39,7 +39,7 @@ export default function SpellsPage() {
         <div
           style={{
             display: "flex",
-            marginTop: 16,
+            marginTop: 24,
           }}
         >
           {/* NAME */}
@@ -217,7 +217,7 @@ export default function SpellsPage() {
         </div>
 
         {/* ADVANCED FILTERS */}
-        <div style={{ display: "flex", marginBottom: 32 }}>
+        <div style={{ display: "flex", marginBottom: 48 }}>
           {/* SAVE REQUIRED */}
           <div
             style={{

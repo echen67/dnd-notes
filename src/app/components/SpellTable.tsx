@@ -49,32 +49,32 @@ export const SpellTable = ({
   return (
     <QueryClientProvider client={queryClient}>
       <div style={{ display: "flex" }}>
+        <div className="tableHeader" style={{ width: "10%" }}></div>
         <div className="tableHeader" style={{ width: "10%" }}>
-          Image
+          <div
+            style={{ cursor: "pointer", width: "fit-content" }}
+            onClick={() => handleClickSort(ORDER_BY_LEVEL)}
+          >
+            Level
+            <SortArrow
+              orderByField={orderByField}
+              orderByAsc={orderByAsc}
+              field={ORDER_BY_LEVEL}
+            />
+          </div>
         </div>
-        <div
-          className="tableHeader"
-          style={{ width: "10%", display: "flex", alignItems: "center" }}
-          onClick={() => handleClickSort(ORDER_BY_LEVEL)}
-        >
-          <p style={{ cursor: "pointer", fontSize: 16 }}>Level</p>
-          <SortArrow
-            orderByField={orderByField}
-            orderByAsc={orderByAsc}
-            field={ORDER_BY_LEVEL}
-          />
-        </div>
-        <div
-          className="tableHeader"
-          style={{ width: "20%", display: "flex", alignItems: "center" }}
-          onClick={() => handleClickSort(ORDER_BY_NAME)}
-        >
-          <p style={{ cursor: "pointer", fontSize: 16 }}>Name</p>
-          <SortArrow
-            orderByField={orderByField}
-            orderByAsc={orderByAsc}
-            field={ORDER_BY_NAME}
-          />
+        <div className="tableHeader" style={{ width: "20%" }}>
+          <div
+            style={{ cursor: "pointer", width: "fit-content" }}
+            onClick={() => handleClickSort(ORDER_BY_NAME)}
+          >
+            Name
+            <SortArrow
+              orderByField={orderByField}
+              orderByAsc={orderByAsc}
+              field={ORDER_BY_NAME}
+            />
+          </div>
         </div>
         <div className="tableHeader" style={{ width: "10%" }}>
           Casting Time

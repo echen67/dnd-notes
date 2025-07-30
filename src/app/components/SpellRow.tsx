@@ -1,7 +1,9 @@
 import { useState } from "react";
+import Image from "next/image";
 import { getSpellDetails } from "../api";
 import { SpellDetails } from "./SpellDetails";
 import { SpellDetailsType } from "../types";
+import { displaySpellLevel, displaySpellImage } from "../utils";
 
 export const SpellRow = ({
   index,
@@ -11,14 +13,18 @@ export const SpellRow = ({
   duration,
   range,
   damage,
+  school,
+  components,
 }: {
   index: string;
   name: string;
-  level: string;
+  level: number;
   castingTime: string;
   duration: string;
   range: string;
   damage: string;
+  school: string;
+  components: string;
 }) => {
   const [openDetails, setOpenDetails] = useState(false);
   const [spellDetails, setSpellDetails] = useState<SpellDetailsType>(null);
@@ -38,13 +44,29 @@ export const SpellRow = ({
     <>
       <div key={index} className="tableRow" onClick={handleClickRow}>
         <div className="tableCell" style={{ width: "10%" }}>
-          image
+          <Image
+            className="dark:invert"
+            src={displaySpellImage(school)}
+            alt="spell icon"
+            width={36}
+            height={36}
+            priority
+            style={{
+              marginLeft: 8,
+              objectFit: "contain",
+            }}
+          />
         </div>
-        <div className="tableCell" style={{ width: "10%" }}>
-          {level}
+        <div className="tableCell" style={{ width: "10%", fontSize: 14 }}>
+          {displaySpellLevel(level)}
         </div>
         <div className="tableCell" style={{ width: "20%" }}>
-          {name}
+          <div>
+            {name}
+            <p style={{ color: "#777", fontSize: 12, marginTop: 4 }}>
+              {school} • {components}
+            </p>
+          </div>
         </div>
         <div className="tableCell" style={{ width: "10%" }}>
           {castingTime}

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { SpellRow } from "./SpellRow";
 import { PAGE_SIZE } from "./SpellTable";
-import { SpellSearchType } from "../types";
+import { SpellSearchType, SpellType } from "../types";
 
 export const SpellData = ({
   page,
@@ -40,12 +40,18 @@ export const SpellData = ({
   limit: ${PAGE_SIZE}, skip: ${
     page * PAGE_SIZE
   }, order: {by: ${orderByField}, direction: ${orderByDirection}}) {
-    index
+    attack_type
     casting_time
+    components
+    duration
+    index
     level
     name
-    duration
     range
+    area_of_effect {
+      size
+      type
+    }
     damage {
       damage_type {
         name
@@ -55,7 +61,6 @@ export const SpellData = ({
     school {
       name
     }
-    attack_type
   }
 }`;
 
@@ -78,11 +83,9 @@ export const SpellData = ({
   //   if (isPending) return <tr>Loading...</tr>;
   //   if (error) return "An error has occurred: " + error.message;
 
-  // console.log("spell data: ", data);
-
   return (
     <>
-      {data?.data?.spells?.map((spell) => (
+      {data?.data?.spells?.map((spell: SpellType) => (
         <SpellRow
           key={spell.index}
           index={spell.index}
@@ -92,6 +95,8 @@ export const SpellData = ({
           duration={spell.duration}
           range={spell.range}
           damage={spell.damage?.damage_type?.name}
+          school={spell.school.name}
+          components={spell.components.join(", ")}
         />
       ))}
     </>
